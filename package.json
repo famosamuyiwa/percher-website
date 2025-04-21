@@ -1,0 +1,13 @@
+{
+  "name": "percher-landing",
+  "version": "1.0.0",
+  "description": "Percher App Landing Page",
+  "scripts": {
+    "dev": "npx tailwindcss -i ./styles.css -o ./dist/output.css --watch",
+    "build": "npx tailwindcss -i ./styles.css -o ./dist/output.css"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  },
+  "dependencies": {}
+}
