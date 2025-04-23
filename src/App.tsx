@@ -431,7 +431,7 @@ function App() {
               href="#"
               className="inline-flex items-center justify-center gap-2 bg-black text-white px-8 py-4 rounded-full hover:bg-black/90"
             >
-              <img src="./assets/images/apple-logo.webp" width="50px" />
+              <img src="./assets/images/apple-logo-white.png" width="50px" />
               <span>Download from App Store</span>
             </a>
             <a
