@@ -6,10 +6,7 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex-shrink-0">
-              <img
-                src="https://tabbie.africa/percher-logo-full.png"
-                width="120px"
-              />
+              <img src="./assets/images/name-logo.png" width="120px" />
             </div>
             <div className="hidden md:block">
               <div className="ml-10 flex items-center space-x-8">
@@ -183,7 +180,7 @@ function App() {
                 Affordable Listings
               </h3>
               <p className="text-black-100">
-                Enjoy luxury spaces at reasonable prices.
+                Enjoy luxury spaces at reasonable prices
               </p>
             </div>
           </div>
@@ -432,22 +429,16 @@ function App() {
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <a
               href="#"
-              className="h-16 inline-flex items-center justify-center gap-2 bg-black text-white px-8 py-4 rounded-full hover:bg-black/90"
+              className="inline-flex items-center justify-center gap-2 bg-black text-white px-8 py-4 rounded-full hover:bg-black/90"
             >
-              <img
-                src="https://tabbie.africa/apple-logo-white.png"
-                width="50px"
-              />
+              <img src="./assets/images/apple-logo.webp" width="50px" />
               <span>Download from App Store</span>
             </a>
             <a
               href="#"
-              className="h-16 inline-flex items-center justify-center gap-2 bg-black text-white px-8 py-4 rounded-full hover:bg-black/90"
+              className="inline-flex items-center justify-center gap-2 bg-black text-white px-8 py-4 rounded-full hover:bg-black/90"
             >
-              <img
-                src="https://tabbie.africa/google-play-logo-colored.png"
-                width="30px"
-              />
+              <img src="./assets/images/play-store.png" width="30px" />
               <span>Download from Google Play</span>
             </a>
           </div>
