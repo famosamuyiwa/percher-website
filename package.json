@@ -1,13 +1,33 @@
 {
-  "name": "percher-landing",
-  "version": "1.0.0",
-  "description": "Percher App Landing Page",
+  "name": "percher-website",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "dev": "npx tailwindcss -i ./styles.css -o ./dist/output.css --watch",
-    "build": "npx tailwindcss -i ./styles.css -o ./dist/output.css"
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.1"
-  },
-  "dependencies": {}
+    "@eslint/js": "^9.22.0",
+    "@tailwindcss/postcss": "^4.1.4",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.17",
+    "eslint": "^8.56.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "globals": "^16.0.0",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.3",
+    "typescript-eslint": "^8.26.1",
+    "vite": "^5.1.0"
+  }
 }
