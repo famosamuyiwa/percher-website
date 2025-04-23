@@ -429,14 +429,14 @@ function App() {
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <a
               href="#"
-              className="inline-flex items-center justify-center gap-2 bg-black text-white px-8 py-4 rounded-full hover:bg-black/90"
+              className="h-16 inline-flex items-center justify-center gap-2 bg-black text-white px-8 py-4 rounded-full hover:bg-black/90"
             >
               <img src="./assets/images/apple-logo-white.png" width="50px" />
               <span>Download from App Store</span>
             </a>
             <a
               href="#"
-              className="inline-flex items-center justify-center gap-2 bg-black text-white px-8 py-4 rounded-full hover:bg-black/90"
+              className="h-16 inline-flex items-center justify-center gap-2 bg-black text-white px-8 py-4 rounded-full hover:bg-black/90"
             >
               <img src="./assets/images/play-store.png" width="30px" />
               <span>Download from Google Play</span>
