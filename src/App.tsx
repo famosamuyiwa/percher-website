@@ -6,7 +6,7 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex-shrink-0">
-              <img src="./assets/images/name-logo.png" width="120px" />
+              <img src="../assets/images/name-logo.png" width="120px" />
             </div>
             <div className="hidden md:block">
               <div className="ml-10 flex items-center space-x-8">
@@ -431,14 +431,14 @@ function App() {
               href="#"
               className="h-16 inline-flex items-center justify-center gap-2 bg-black text-white px-8 py-4 rounded-full hover:bg-black/90"
             >
-              <img src="./assets/images/apple-logo-white.png" width="50px" />
+              <img src="../assets/images/apple-logo-white.png" width="50px" />
               <span>Download from App Store</span>
             </a>
             <a
               href="#"
               className="h-16 inline-flex items-center justify-center gap-2 bg-black text-white px-8 py-4 rounded-full hover:bg-black/90"
             >
-              <img src="./assets/images/play-store.png" width="30px" />
+              <img src="../assets/images/play-store.png" width="30px" />
               <span>Download from Google Play</span>
             </a>
           </div>
