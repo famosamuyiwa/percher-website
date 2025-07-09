@@ -1,53 +1,44 @@
+import { useState } from "react";
+import AboutUs from "./AboutUs";
+import Contact from "./Contact";
+import PrivacyPolicy from "./PrivacyPolicy";
+import TermsOfService from "./TermsOfService";
+// import Blog from "./Blog";
+import Navigation from "./Navigation";
+import Footer from "./Footer";
+
 function App() {
+  const [currentPage, setCurrentPage] = useState("home");
+
+  const navigateTo = (page: string) => {
+    setCurrentPage(page);
+    window.scrollTo(0, 0);
+  };
+
+  if (currentPage === "about") {
+    return <AboutUs onNavigate={navigateTo} />;
+  }
+
+  if (currentPage === "contact") {
+    return <Contact onNavigate={navigateTo} />;
+  }
+
+  if (currentPage === "privacy") {
+    return <PrivacyPolicy onNavigate={navigateTo} />;
+  }
+
+  if (currentPage === "terms") {
+    return <TermsOfService onNavigate={navigateTo} />;
+  }
+
+  // if (currentPage === "blog") {
+  //   return <Blog onNavigate={navigateTo} />;
+  // }
+
   return (
     <>
       {/* Navigation */}
-      <nav className="fixed w-full bg-white/80 backdrop-blur-md z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex-shrink-0">
-              <img
-                src="https://cdn.percher.africa/percher-logo-full.png"
-                width="120px"
-              />
-            </div>
-            <div className="hidden md:block">
-              <div className="ml-10 flex items-center space-x-8">
-                <a
-                  href="#search"
-                  className="text-black-200 hover:text-primary-300"
-                >
-                  Search Perchs
-                </a>
-                <a
-                  href="#features"
-                  className="text-black-200 hover:text-primary-300"
-                >
-                  Features
-                </a>
-                <a
-                  href="#how-it-works"
-                  className="text-black-200 hover:text-primary-300"
-                >
-                  How it Works
-                </a>
-                <a
-                  href="#download"
-                  className="flex flex-row gap-2 bg-primary-300 text-white px-6 py-2 rounded-full hover:bg-primary-300/90"
-                >
-                  <span
-                    className="material-symbols-rounded"
-                    style={{ color: "white" }}
-                  >
-                    download
-                  </span>
-                  Download App
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navigation currentPage={currentPage} onNavigate={navigateTo} />
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 gradient-bg">
@@ -62,10 +53,10 @@ function App() {
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <a
-                href="#download"
+                href="#waitlist"
                 className="bg-primary-300 text-white px-8 py-4 rounded-full hover:bg-primary-300/90 inline-block"
               >
-                Start Your Search
+                Join Our Waitlist
               </a>
               <a
                 href="#features"
@@ -253,37 +244,22 @@ function App() {
       </section>
 
       {/* Search Preview Section */}
-      <section id="search" className="py-20 bg-secondary-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center text-secondary-300 mb-16">
-            Find Your Next Perch in Minutes
+      <section id="waitlist" className="py-20 bg-secondary-100">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-bold text-secondary-300 mb-6">
+            Join Our Waitlist !
           </h2>
-          <div className="bg-white rounded-2xl p-6 shadow-lg max-w-3xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-4 mb-4">
-              <div>
-                <label className="block text-sm font-medium text-black-200 mb-1">
-                  Location
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter city or neighborhood"
-                  className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-300"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-black-200 mb-1">
-                  Price Range
-                </label>
-                <select className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-300">
-                  <option>Any Price</option>
-                  <option>₦10,000 - ₦50,000</option>
-                  <option>₦50,000 - ₦200,000</option>
-                  <option>₦200,000+</option>
-                </select>
-              </div>
-            </div>
-            <button className="w-full bg-primary-300 text-white py-3 rounded-lg hover:bg-primary-300/90">
-              Search Properties
+          <p className="text-lg text-black-100 mb-8 max-w-2xl mx-auto">
+            Be the first to know when Percher launches.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <input
+              type="email"
+              placeholder="Enter your email address"
+              className="flex-1 px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-300"
+            />
+            <button className="bg-primary-300 text-white px-6 py-3 rounded-lg hover:bg-primary-300/90 font-medium">
+              Join Waitlist
             </button>
           </div>
         </div>
@@ -420,7 +396,7 @@ function App() {
       </section>
 
       {/* Download Section */}
-      <section id="download" className="py-20">
+      {/* <section id="download" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-secondary-300 mb-6">
             Ready to Find Your Perfect Space?
@@ -452,92 +428,10 @@ function App() {
             </a>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Footer */}
-      <footer className="bg-secondary-300 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-2xl font-bold mb-4">Percher</h3>
-              <p className="text-gray-300">
-                Find your perfect rental property.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">For Renters</h4>
-              <ul className="space-y-2">
-                <li>
-                  <a href="#search" className="text-gray-300 hover:text-white">
-                    Search Perchs
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#features"
-                    className="text-gray-300 hover:text-white"
-                  >
-                    How It Works
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-300 hover:text-white">
-                    Saved Perchs
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">For Perch Owners</h4>
-              <ul className="space-y-2">
-                <li>
-                  <a href="#" className="text-gray-300 hover:text-white">
-                    List Perch
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-300 hover:text-white">
-                    Landlord Tools
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-300 hover:text-white">
-                    Pricing
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Company</h4>
-              <ul className="space-y-2">
-                <li>
-                  <a href="#" className="text-gray-300 hover:text-white">
-                    About Us
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-300 hover:text-white">
-                    Contact
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-300 hover:text-white">
-                    Privacy Policy
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-300 hover:text-white">
-                    Terms of Service
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="mt-12 pt-8 border-t border-gray-700 text-center text-gray-300">
-            <p>&copy; 2025 Percher. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer onNavigate={navigateTo} />
     </>
   );
 }
