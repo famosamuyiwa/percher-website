@@ -386,12 +386,19 @@ function App() {
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-2xl shadow-lg">
               <div className="flex items-center mb-4">
-                <img
+                {/* <img
                   src="https://cdn.percher.africa/1744577060574-s6vot9lt0gg.png"
                   width="100px"
                   height="100px"
                   style={{ borderRadius: "50px" }}
-                />
+                /> */}
+                <div>
+                  <div className="w-16 h-16 bg-gradient-to-br from-secondary-100 via-primary-300 to-secondary-300 rounded-full flex items-center justify-center mx-auto shadow-lg">
+                    <span className="material-symbols-rounded text-5xl text-white">
+                      person
+                    </span>
+                  </div>
+                </div>
                 <div className="ml-4">
                   <h4 className="font-semibold text-secondary-300">Ajadi O.</h4>
                   <p className="text-black-100">Orchid, Lagos</p>
@@ -404,12 +411,19 @@ function App() {
             </div>
             <div className="bg-white p-6 rounded-2xl shadow-lg">
               <div className="flex items-center mb-4">
-                <img
+                <div>
+                  <div className="w-16 h-16 bg-gradient-to-br from-secondary-100 via-primary-300 to-secondary-300 rounded-full flex items-center justify-center mx-auto shadow-lg">
+                    <span className="material-symbols-rounded text-5xl text-white">
+                      person
+                    </span>
+                  </div>
+                </div>
+                {/* <img
                   src="https://cdn.percher.africa/1745062099413-vp5js2zo24j.jpeg"
                   width="100px"
                   height="100px"
                   style={{ borderRadius: "50px" }}
-                />
+                /> */}
                 <div className="ml-4">
                   <h4 className="font-semibold text-secondary-300">
                     Favour I.
@@ -424,12 +438,19 @@ function App() {
             </div>
             <div className="bg-white p-6 rounded-2xl shadow-lg">
               <div className="flex items-center mb-4">
-                <img
+                {/* <img
                   src="https://cdn.percher.africa/1744935625460-fo96jqgpg3j.jpeg"
                   width="100px"
                   height="100px"
                   style={{ borderRadius: "50px" }}
-                />
+                /> */}
+                <div>
+                  <div className="w-16 h-16 bg-gradient-to-br from-secondary-100 via-primary-300 to-secondary-300 rounded-full flex items-center justify-center mx-auto shadow-lg">
+                    <span className="material-symbols-rounded text-5xl text-white">
+                      person
+                    </span>
+                  </div>
+                </div>
                 <div className="ml-4">
                   <h4 className="font-semibold text-secondary-300">
                     Famosa O.
