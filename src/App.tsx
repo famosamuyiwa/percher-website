@@ -393,7 +393,7 @@ function App() {
                   style={{ borderRadius: "50px" }}
                 /> */}
                 <div>
-                  <div className="w-16 h-16 bg-gradient-to-br from-secondary-100 via-primary-300 to-secondary-300 rounded-full flex items-center justify-center mx-auto shadow-lg">
+                  <div className="w-20 h-20 bg-gradient-to-br from-secondary-100 via-primary-300 to-secondary-300 rounded-full flex items-center justify-center mx-auto shadow-lg">
                     <span className="material-symbols-rounded text-5xl text-white">
                       person
                     </span>
@@ -412,7 +412,7 @@ function App() {
             <div className="bg-white p-6 rounded-2xl shadow-lg">
               <div className="flex items-center mb-4">
                 <div>
-                  <div className="w-16 h-16 bg-gradient-to-br from-secondary-100 via-primary-300 to-secondary-300 rounded-full flex items-center justify-center mx-auto shadow-lg">
+                  <div className="w-20 h-20 bg-gradient-to-br from-secondary-100 via-primary-300 to-secondary-300 rounded-full flex items-center justify-center mx-auto shadow-lg">
                     <span className="material-symbols-rounded text-5xl text-white">
                       person
                     </span>
@@ -445,7 +445,7 @@ function App() {
                   style={{ borderRadius: "50px" }}
                 /> */}
                 <div>
-                  <div className="w-16 h-16 bg-gradient-to-br from-secondary-100 via-primary-300 to-secondary-300 rounded-full flex items-center justify-center mx-auto shadow-lg">
+                  <div className="w-20 h-20 bg-gradient-to-br from-secondary-100 via-primary-300 to-secondary-300 rounded-full flex items-center justify-center mx-auto shadow-lg">
                     <span className="material-symbols-rounded text-5xl text-white">
                       person
                     </span>
