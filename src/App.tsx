@@ -453,7 +453,7 @@ function App() {
                 </div>
                 <div className="ml-4">
                   <h4 className="font-semibold text-secondary-300">
-                    Famosa O.
+                    Sodunke O.
                   </h4>
                   <p className="text-black-100">Gwarinpa, Abuja</p>
                 </div>
