@@ -46,6 +46,10 @@ function AboutUs({ onNavigate }: AboutUsProps) {
                 ensuring both renters and property owners have a seamless,
                 secure, and transparent experience.
               </p>
+              <p className="text-lg text-black-100 mb-6">
+                The goal is to have onboarded 10,000+ users and 5,000+
+                properties by the end of 2026.
+              </p>
               <div className="grid grid-cols-2 gap-6 mt-8">
                 <div className="text-center">
                   <div className="text-3xl font-bold text-primary-300 mb-2">
@@ -144,18 +148,22 @@ function AboutUs({ onNavigate }: AboutUsProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-secondary-300 mb-6">
-              Our Story
+              Our Vision
             </h2>
             <p className="text-lg text-black-100 max-w-4xl mx-auto">
               Percher was born from a simple frustration: finding a rental
               property in Africa shouldn't be this hard. Our founders
               experienced firsthand the challenges of navigating unreliable
-              listings, unresponsive agents, and the constant fear of scams.
+              listings, unresponsive agents, and the constant fear of scams. Our
+              vision is to be the leading rental platform in Africa, providing a
+              seamless and secure experience for both renters and property
+              owners. We aim to make renting in Africa easy, transparent, and
+              hassle-free.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="w-16 h-16 bg-primary-300 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-20 h-20 bg-primary-300 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-white text-2xl font-bold">2023</span>
               </div>
               <h3 className="text-xl font-semibold text-secondary-300 mb-3">
@@ -167,19 +175,19 @@ function AboutUs({ onNavigate }: AboutUsProps) {
               </p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-primary-300 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-20 h-20 bg-primary-300 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-white text-2xl font-bold">2024</span>
               </div>
               <h3 className="text-xl font-semibold text-secondary-300 mb-3">
                 Growth & Launch
               </h3>
               <p className="text-black-100">
-                We launched our mobile app and began connecting thousands of
-                users with their perfect spaces.
+                We plan to launch our mobile app and begin connecting thousands
+                of users with their perfect spaces.
               </p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-primary-300 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-20 h-20 bg-primary-300 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-white text-2xl font-bold">2025</span>
               </div>
               <h3 className="text-xl font-semibold text-secondary-300 mb-3">
@@ -195,71 +203,78 @@ function AboutUs({ onNavigate }: AboutUsProps) {
       </section>
 
       {/* Team Section */}
-      <section id="team" className="py-20 bg-secondary-100">
+      <section
+        id="team"
+        className="py-20 bg-gradient-to-br from-secondary-50 to-primary-50"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center text-secondary-300 mb-16">
-            Meet Our Team
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-2xl shadow-lg text-center">
-              <div className="w-24 h-24 bg-gradient-to-br from-primary-100 to-accent-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span
-                  className="material-symbols-rounded text-4xl"
-                  style={{ color: "#00BFFF" }}
-                >
-                  person
-                </span>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-secondary-300 mb-6">
+              Meet Our <span className="text-primary-300">Visionary</span>
+            </h2>
+            <p className="text-xl text-black-100 max-w-3xl mx-auto">
+              Leading the revolution in African rental markets with innovation,
+              passion, and a commitment to making housing accessible for
+              everyone.
+            </p>
+          </div>
+
+          <div className="flex justify-center">
+            <div className="bg-white p-8 rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-300 max-w-md transform hover:-translate-y-2">
+              <div className="relative mb-6">
+                <div className="w-32 h-32 bg-gradient-to-br from-primary-300 via-accent-300 to-secondary-300 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  <span className="material-symbols-rounded text-5xl text-white">
+                    person
+                  </span>
+                </div>
+                <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-primary-300 rounded-full flex items-center justify-center shadow-lg">
+                  <span className="material-symbols-rounded text-white text-sm">
+                    verified
+                  </span>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold text-secondary-300 mb-2">
-                John Doe
-              </h3>
-              <p className="text-primary-300 mb-3">CEO & Co-founder</p>
-              <p className="text-black-100">
-                Passionate about solving real-world problems through technology
-                and innovation.
-              </p>
-            </div>
-            <div className="bg-white p-6 rounded-2xl shadow-lg text-center">
-              <div className="w-24 h-24 bg-gradient-to-br from-primary-100 to-accent-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span
-                  className="material-symbols-rounded text-4xl"
-                  style={{ color: "#00BFFF" }}
-                >
-                  person
-                </span>
+
+              <div className="text-center">
+                <h3 className="text-2xl font-bold text-secondary-300 mb-2">
+                  Famosa Muyiwa
+                </h3>
+                <p className="text-primary-300 font-semibold mb-4 text-lg">
+                  CEO & Founder
+                </p>
+                <p className="text-black-100 leading-relaxed mb-6">
+                  A visionary entrepreneur passionate about solving real-world
+                  problems through technology and innovation. With a deep
+                  understanding of the African market, Famosa is dedicated to
+                  transforming how people find and rent properties across the
+                  continent.
+                </p>
+
+                <div className="flex justify-center space-x-4">
+                  <div className="flex items-center gap-2 bg-primary-50 px-4 py-2 rounded-full">
+                    <span className="material-symbols-rounded text-primary-300 text-sm">
+                      lightbulb
+                    </span>
+                    <span className="text-sm font-medium text-primary-300">
+                      Innovation
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 bg-accent-50 px-4 py-2 rounded-full">
+                    <span className="material-symbols-rounded text-accent-300 text-sm">
+                      trending_up
+                    </span>
+                    <span className="text-sm font-medium text-accent-300">
+                      Growth
+                    </span>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold text-secondary-300 mb-2">
-                Jane Smith
-              </h3>
-              <p className="text-primary-300 mb-3">CTO & Co-founder</p>
-              <p className="text-black-100">
-                Building scalable solutions that make a difference in people's
-                lives.
-              </p>
-            </div>
-            <div className="bg-white p-6 rounded-2xl shadow-lg text-center">
-              <div className="w-24 h-24 bg-gradient-to-br from-primary-100 to-accent-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span
-                  className="material-symbols-rounded text-4xl"
-                  style={{ color: "#00BFFF" }}
-                >
-                  person
-                </span>
-              </div>
-              <h3 className="text-xl font-semibold text-secondary-300 mb-2">
-                Mike Johnson
-              </h3>
-              <p className="text-primary-300 mb-3">Head of Operations</p>
-              <p className="text-black-100">
-                Ensuring every user has an exceptional experience with Percher.
-              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20">
+      {/* <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-secondary-300 mb-6">
             Join the Percher Community
@@ -283,7 +298,7 @@ function AboutUs({ onNavigate }: AboutUsProps) {
             </button>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Footer */}
       <Footer onNavigate={onNavigate} />
