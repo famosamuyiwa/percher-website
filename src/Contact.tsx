@@ -1,11 +1,68 @@
+import { useState } from "react";
 import Footer from "./Footer";
 import Navigation from "./Navigation";
-
+import { apiService } from "./services/api";
+import { ContactFormDto } from "./interfaces/common";
+import LoaderModal from "./Loader";
+import ToastManager from "./Toast";
 interface ContactProps {
   onNavigate: (page: string) => void;
 }
 
 function Contact({ onNavigate }: ContactProps) {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    subject: "General Inquiry",
+    message: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const isFormValid =
+    formData.firstName.trim() &&
+    formData.lastName.trim() &&
+    formData.email.trim() &&
+    formData.message.trim();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    if (isFormValid) {
+      try {
+        await apiService.contact(formData as ContactFormDto);
+        window.showSuccess("Message sent successfully!");
+      } catch (error) {
+        window.showError(
+          (error as Error).message ||
+            "Failed to send message. Please try again."
+        );
+      } finally {
+        setIsLoading(false);
+      }
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        subject: "General Inquiry",
+        message: "",
+      });
+    }
+  };
+
   return (
     <>
       {/* Navigation */}
@@ -35,7 +92,7 @@ function Contact({ onNavigate }: ContactProps) {
               <h2 className="text-2xl font-bold text-secondary-300 mb-6">
                 Send us a Message
               </h2>
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-black-200 mb-2">
@@ -43,6 +100,9 @@ function Contact({ onNavigate }: ContactProps) {
                     </label>
                     <input
                       type="text"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
                       className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-300"
                       placeholder="Enter your first name"
                     />
@@ -53,6 +113,9 @@ function Contact({ onNavigate }: ContactProps) {
                     </label>
                     <input
                       type="text"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
                       className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-300"
                       placeholder="Enter your last name"
                     />
@@ -64,6 +127,9 @@ function Contact({ onNavigate }: ContactProps) {
                   </label>
                   <input
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
                     className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-300"
                     placeholder="Enter your email address"
                   />
@@ -72,12 +138,17 @@ function Contact({ onNavigate }: ContactProps) {
                   <label className="block text-sm font-medium text-black-200 mb-2">
                     Subject
                   </label>
-                  <select className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-300">
-                    <option>General Inquiry</option>
-                    <option>Technical Support</option>
-                    <option>Partnership</option>
-                    <option>Feedback</option>
-                    <option>Other</option>
+                  <select
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-300"
+                  >
+                    <option value="General Inquiry">General Inquiry</option>
+                    <option value="Technical Support">Technical Support</option>
+                    <option value="Partnership">Partnership</option>
+                    <option value="Feedback">Feedback</option>
+                    <option value="Other">Other</option>
                   </select>
                 </div>
                 <div>
@@ -85,6 +156,9 @@ function Contact({ onNavigate }: ContactProps) {
                     Message
                   </label>
                   <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
                     rows={6}
                     className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-300 resize-none"
                     placeholder="Tell us how we can help you..."
@@ -92,7 +166,12 @@ function Contact({ onNavigate }: ContactProps) {
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-primary-300 text-white py-3 rounded-lg hover:bg-primary-300/90 font-medium"
+                  disabled={!isFormValid}
+                  className={`w-full py-3 rounded-lg font-medium transition-colors ${
+                    isFormValid
+                      ? "bg-primary-300 text-white hover:bg-primary-300/90"
+                      : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  }`}
                 >
                   Send Message
                 </button>
@@ -205,6 +284,10 @@ function Contact({ onNavigate }: ContactProps) {
 
       {/* Footer */}
       <Footer onNavigate={onNavigate} />
+      {/* Loading Modal */}
+      <LoaderModal isOpen={isLoading} />
+      {/* Toast Manager */}
+      <ToastManager />
     </>
   );
 }

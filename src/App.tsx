@@ -6,13 +6,50 @@ import TermsOfService from "./TermsOfService";
 // import Blog from "./Blog";
 import Navigation from "./Navigation";
 import Footer from "./Footer";
+import Modal from "./Modal";
+import LoaderModal from "./Loader";
+import { apiService } from "./services/api";
+import { ToastManager } from "./Toast";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState("");
 
   const navigateTo = (page: string) => {
     setCurrentPage(page);
     window.scrollTo(0, 0);
+  };
+
+  const handleJoinWaitlist = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      if (!email.trim()) {
+        window.showError("Please enter your email address");
+        setIsLoading(false);
+        return;
+      }
+
+      // Call the API service
+      await apiService.joinWaitlist({ email: email.trim() });
+      setIsModalOpen(true);
+      setEmail(""); // Clear the email field
+    } catch (error) {
+      const errorMessage =
+        (error as Error).message ||
+        "Failed to join waitlist. Please try again.";
+      window.showError(errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setIsLoading(false);
   };
 
   if (currentPage === "about") {
@@ -52,11 +89,12 @@ function App() {
               and manage your rental journey - all in one seamless platform.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <a
-                href="#waitlist"
-                className="bg-primary-300 text-white px-8 py-4 rounded-full hover:bg-primary-300/90 inline-block"
-              >
-                Join Our Waitlist
+              <a href="#waitlist">
+                <button
+                  className={`px-8 py-4 rounded-full inline-block font-medium transition-colors bg-primary-300 text-white hover:bg-primary-300/90"`}
+                >
+                  Join Our Waitlist
+                </button>
               </a>
               <a
                 href="#features"
@@ -252,16 +290,29 @@ function App() {
           <p className="text-lg text-black-100 mb-8 max-w-2xl mx-auto">
             Be the first to know when Percher launches.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+          <form
+            onSubmit={handleJoinWaitlist}
+            className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
+          >
             <input
               type="email"
               placeholder="Enter your email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="flex-1 px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-300"
             />
-            <button className="bg-primary-300 text-white px-6 py-3 rounded-lg hover:bg-primary-300/90 font-medium">
+            <button
+              type="submit"
+              disabled={!email.trim() || isLoading}
+              className={`px-6 py-3 rounded-lg font-medium transition-colors ${
+                !email.trim() || isLoading
+                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  : "bg-primary-300 text-white hover:bg-primary-300/90"
+              }`}
+            >
               Join Waitlist
             </button>
-          </div>
+          </form>
         </div>
       </section>
 
@@ -432,6 +483,21 @@ function App() {
 
       {/* Footer */}
       <Footer onNavigate={navigateTo} />
+
+      {/* Success Modal */}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        title="Successfully Joined!"
+        message="Thank you for joining our waitlist! We'll notify you as soon as Percher is available in your area."
+        type="success"
+      />
+
+      {/* Loading Modal */}
+      <LoaderModal isOpen={isLoading} />
+
+      {/* Toast Manager */}
+      <ToastManager />
     </>
   );
 }
