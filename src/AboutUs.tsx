@@ -66,13 +66,12 @@ function AboutUs({ onNavigate }: AboutUsProps) {
               </div>
             </div>
             <div className="relative">
-              <div className="aspect-square rounded-3xl bg-gradient-to-br from-primary-100 to-accent-100 flex items-center justify-center">
-                <span
-                  className="material-symbols-rounded text-9xl"
-                  style={{ color: "#00BFFF" }}
-                >
-                  home
-                </span>
+              <div className="aspect-square p-4 rounded-3xl bg-gradient-to-br from-primary-100 to-accent-100 flex items-center justify-center">
+                <img
+                  src="/assets/images/houses.png"
+                  alt="houses"
+                  className="w-full h-full object-contain"
+                />
               </div>
             </div>
           </div>
@@ -164,7 +163,7 @@ function AboutUs({ onNavigate }: AboutUsProps) {
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="w-20 h-20 bg-primary-300 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white text-2xl font-bold">2023</span>
+                <span className="text-white text-2xl font-bold">2024</span>
               </div>
               <h3 className="text-xl font-semibold text-secondary-300 mb-3">
                 The Beginning
@@ -176,7 +175,7 @@ function AboutUs({ onNavigate }: AboutUsProps) {
             </div>
             <div className="text-center">
               <div className="w-20 h-20 bg-primary-300 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white text-2xl font-bold">2024</span>
+                <span className="text-white text-2xl font-bold">2025</span>
               </div>
               <h3 className="text-xl font-semibold text-secondary-300 mb-3">
                 Growth & Launch
@@ -188,7 +187,7 @@ function AboutUs({ onNavigate }: AboutUsProps) {
             </div>
             <div className="text-center">
               <div className="w-20 h-20 bg-primary-300 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white text-2xl font-bold">2025</span>
+                <span className="text-white text-2xl font-bold">2026</span>
               </div>
               <h3 className="text-xl font-semibold text-secondary-300 mb-3">
                 Expansion
