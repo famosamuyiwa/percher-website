@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
 import AboutUs from "./AboutUs";
 import Contact from "./Contact";
 import PrivacyPolicy from "./PrivacyPolicy";
@@ -12,23 +11,22 @@ import LoaderModal from "./Loader";
 import { apiService } from "./services/api";
 import { ToastManager } from "./Toast";
 
-function Home() {
+function App() {
+  const [currentPage, setCurrentPage] = useState("home");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+
+  const navigateTo = (page: string) => {
+    setCurrentPage(page);
+    window.scrollTo(0, 0);
+  };
 
   const handleJoinWaitlist = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      if (!name.trim()) {
-        window.showError("Please enter your name");
-        setIsLoading(false);
-        return;
-      }
-
       if (!email.trim()) {
         window.showError("Please enter your email address");
         setIsLoading(false);
@@ -36,12 +34,8 @@ function Home() {
       }
 
       // Call the API service
-      await apiService.joinWaitlist({
-        name: name.trim(),
-        email: email.trim(),
-      });
+      await apiService.joinWaitlist({ email: email.trim() });
       setIsModalOpen(true);
-      setName(""); // Clear the name field
       setEmail(""); // Clear the email field
     } catch (error) {
       const errorMessage =
@@ -58,23 +52,41 @@ function Home() {
     setIsLoading(false);
   };
 
+  if (currentPage === "about") {
+    return <AboutUs onNavigate={navigateTo} />;
+  }
+
+  if (currentPage === "contact") {
+    return <Contact onNavigate={navigateTo} />;
+  }
+
+  if (currentPage === "privacy") {
+    return <PrivacyPolicy onNavigate={navigateTo} />;
+  }
+
+  if (currentPage === "terms") {
+    return <TermsOfService onNavigate={navigateTo} />;
+  }
+
+  // if (currentPage === "blog") {
+  //   return <Blog onNavigate={navigateTo} />;
+  // }
+
   return (
     <>
       {/* Navigation */}
-      <Navigation />
+      <Navigation currentPage={currentPage} onNavigate={navigateTo} />
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 gradient-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-5xl md:text-6xl font-bold text-secondary-300 mb-6">
-              Side Questing For The{" "}
-              <span className="text-primary-300">Plot</span>
+              Find Your Perfect <span className="text-primary-300">Space</span>
             </h1>
             <p className="text-xl text-black-100 mb-12 max-w-2xl mx-auto">
-              Turn your everyday adventures into epic side quests. Connect with
-              people who share your interests and create unforgettable
-              experiences together.
+              Discover beautiful houses and properties for rent. Search, book,
+              and manage your rental journey - all in one seamless platform.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <a href="#waitlist">
@@ -98,12 +110,9 @@ function Home() {
       {/* Features Section */}
       <section id="features" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center text-secondary-300 mb-5">
-            Why Choose Leankly? 🤔
+          <h2 className="text-3xl font-bold text-center text-secondary-300 mb-16">
+            Why Choose Percher? 🤔
           </h2>
-          <p className=" text-center text-secondary-300 mb-16">
-            Everything you need to turn spontaneous ideas into real adventures
-          </p>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="p-6 rounded-2xl bg-white shadow-lg">
               <div className="w-12 h-12 bg-accent-100 rounded-full flex items-center justify-center mb-4">
@@ -111,16 +120,15 @@ function Home() {
                   className="material-symbols-rounded"
                   style={{ color: "#ff7f50" }}
                 >
-                  explore
+                  travel_explore
                 </span>
               </div>
               <h3 className="text-xl font-semibold text-secondary-300 mb-3">
-                Side Quests
+                Smart Search
               </h3>
               <p className="text-black-100">
-                Turn any activity into a quest. Whether it's trying a new
-                restaurant, exploring a park, or learning something new - make
-                it an adventure.
+                Find exactly what you're looking for with advanced filters for
+                location, price, amenities, and more.
               </p>
             </div>
             <div className="p-6 rounded-2xl bg-white shadow-lg">
@@ -129,16 +137,14 @@ function Home() {
                   className="material-symbols-rounded"
                   style={{ color: "#ff7f50" }}
                 >
-                  group
+                  calendar_add_on
                 </span>
               </div>
               <h3 className="text-xl font-semibold text-secondary-300 mb-3">
-                Connect with Leankers
+                Easy Booking
               </h3>
               <p className="text-black-100">
-                Find people who share your interests and join their leanks, or
-                invite others to join yours. Build meaningful connections
-                through shared experiences.{" "}
+                Secure your space instantly with our real-time booking system.
               </p>
             </div>
             <div className="p-6 rounded-2xl bg-white shadow-lg">
@@ -147,15 +153,15 @@ function Home() {
                   className="material-symbols-rounded"
                   style={{ color: "#ff7f50" }}
                 >
-                  location_on
+                  fact_check
                 </span>
               </div>
               <h3 className="text-xl font-semibold text-secondary-300 mb-3">
-                Location-Based
+                Scam Free Zone
               </h3>
               <p className="text-black-100">
-                Discover leanks happening near you. Filter by location, time,
-                and interests to find the perfect adventure for your schedule.{" "}
+                Proper measures are taken to ensure percher is a safe space for
+                both guests and hosts to thrive in transparency.
               </p>
             </div>
             <div className="p-6 rounded-2xl bg-white shadow-lg">
@@ -164,15 +170,15 @@ function Home() {
                   className="material-symbols-rounded"
                   style={{ color: "#ff7f50" }}
                 >
-                  chat
+                  local_police
                 </span>
               </div>
               <h3 className="text-xl font-semibold text-secondary-300 mb-3">
-                Real-Time Chat
+                Secure Payments
               </h3>
               <p className="text-black-100">
-                Plan and coordinate with your leank party through integrated
-                messaging. Share updates, make plans, and stay connected.
+                Pay rent and deposits securely through our integrated payment
+                system with multiple payment options.
               </p>
             </div>
             <div className="p-6 rounded-2xl bg-white shadow-lg">
@@ -181,15 +187,16 @@ function Home() {
                   className="material-symbols-rounded"
                   style={{ color: "#ff7f50" }}
                 >
-                  event
+                  how_to_reg
                 </span>
               </div>
               <h3 className="text-xl font-semibold text-secondary-300 mb-3">
-                Schedule & Plan
+                Verified Hosts
               </h3>
               <p className="text-black-100">
-                Set dates and times for your quests. Use the built-in calendar
-                to keep track of all your upcoming adventures.
+                The hosts go through a meticulous screening and identity
+                verification before they are verified and granted access to list
+                properties.
               </p>
             </div>
             <div className="p-6 rounded-2xl bg-white shadow-lg">
@@ -198,15 +205,76 @@ function Home() {
                   className="material-symbols-rounded"
                   style={{ color: "#ff7f50" }}
                 >
-                  auto_awesome
+                  money_bag
                 </span>
               </div>
               <h3 className="text-xl font-semibold text-secondary-300 mb-3">
-                Easy to Use
+                Affordable Listings
               </h3>
               <p className="text-black-100">
-                Intuitive interface designed for spontaneity. Create a leank in
-                seconds and start connecting with like-minded adventurers.
+                Enjoy luxury spaces at reasonable prices.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Upcoming Features Section */}
+      <section className="py-20 bg-primary-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center text-secondary-300 mb-16">
+            Coming Soon 🚀
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="p-6 rounded-2xl bg-white shadow-lg">
+              <div className="w-12 h-12 bg-accent-100 rounded-full flex items-center justify-center mb-4">
+                <span
+                  className="material-symbols-rounded"
+                  style={{ color: "#ff7f50" }}
+                >
+                  home_pin
+                </span>
+              </div>
+              <h3 className="text-xl font-semibold text-secondary-300 mb-3">
+                Map Integrations
+              </h3>
+              <p className="text-black-100">
+                Comprehensive tools for perch owners and guests to explore,
+                manage navigation and get insights on a particular region.
+              </p>
+            </div>
+            <div className="p-6 rounded-2xl bg-white shadow-lg">
+              <div className="w-12 h-12 bg-accent-100 rounded-full flex items-center justify-center mb-4">
+                <span
+                  className="material-symbols-rounded"
+                  style={{ color: "#ff7f50" }}
+                >
+                  forum
+                </span>
+              </div>
+              <h3 className="text-xl font-semibold text-secondary-300 mb-3">
+                In-App Messaging
+              </h3>
+              <p className="text-black-100">
+                Direct communication between guests and perch owners with
+                instant notifications.
+              </p>
+            </div>
+            <div className="p-6 rounded-2xl bg-white shadow-lg">
+              <div className="w-12 h-12 bg-accent-100 rounded-full flex items-center justify-center mb-4">
+                <span
+                  className="material-symbols-rounded"
+                  style={{ color: "#ff7f50" }}
+                >
+                  simulation
+                </span>
+              </div>
+              <h3 className="text-xl font-semibold text-secondary-300 mb-3">
+                Virtual Tours
+              </h3>
+              <p className="text-black-100">
+                Experience the perch without ever setting foot in it by
+                exploring virtually from the comfort of your device.
               </p>
             </div>
           </div>
@@ -220,31 +288,24 @@ function Home() {
             Join Our Waitlist !
           </h2>
           <p className="text-lg text-black-100 mb-8 max-w-2xl mx-auto">
-            Be the first to know when Leankly launches.
+            Be the first to know when Percher launches.
           </p>
           <form
             onSubmit={handleJoinWaitlist}
-            className="flex flex-col gap-4 max-w-md mx-auto"
+            className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
           >
-            <input
-              type="text"
-              placeholder="Enter your name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-300"
-            />
             <input
               type="email"
               placeholder="Enter your email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-300"
+              className="flex-1 px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-300"
             />
             <button
               type="submit"
-              disabled={!name.trim() || !email.trim() || isLoading}
-              className={`w-full px-6 py-3 rounded-lg font-medium transition-colors ${
-                !name.trim() || !email.trim() || isLoading
+              disabled={!email.trim() || isLoading}
+              className={`px-6 py-3 rounded-lg font-medium transition-colors ${
+                !email.trim() || isLoading
                   ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                   : "bg-primary-300 text-white hover:bg-primary-300/90"
               }`}
@@ -259,7 +320,7 @@ function Home() {
       <section id="how-it-works" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center text-secondary-300 mb-16">
-            How Leankly Works
+            How Percher Works
           </h2>
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -270,12 +331,11 @@ function Home() {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold text-secondary-300 mb-2">
-                      Create Your Leank
+                      Search & Filter
                     </h3>
                     <p className="text-black-100">
-                      Think of something fun you want to do - a new restaurant,
-                      a hiking trail, a workshop, anything! Add details, photos,
-                      and set a time.
+                      Browse thousands of listings with detailed filters to find
+                      your perfect match.
                     </p>
                   </div>
                 </div>
@@ -285,12 +345,11 @@ function Home() {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold text-secondary-300 mb-2">
-                      Connect with Leankers
+                      Schedule Viewings
                     </h3>
                     <p className="text-black-100">
-                      People nearby will see your leank and can request to join.
-                      You can also browse and join leanks created by others in
-                      your area.
+                      Book perch viewings instantly with our real-time
+                      scheduling system.
                     </p>
                   </div>
                 </div>
@@ -300,12 +359,11 @@ function Home() {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold text-secondary-300 mb-2">
-                      Embark on Adventure
+                      Apply & Secure
                     </h3>
                     <p className="text-black-100">
-                      Once you've found your leank party, chat to coordinate,
-                      meet up, and enjoy your side quest together. Make
-                      memories, make friends!
+                      Submit your application and necessary documents all
+                      through the app.
                     </p>
                   </div>
                 </div>
@@ -319,6 +377,96 @@ function Home() {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <section className="py-20 bg-secondary-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center text-secondary-300 mb-16">
+            What Our Users Say 🤩
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white p-6 rounded-2xl shadow-lg">
+              <div className="flex items-center mb-4">
+                {/* <img
+                  src="https://cdn.percher.africa/1744577060574-s6vot9lt0gg.png"
+                  width="100px"
+                  height="100px"
+                  style={{ borderRadius: "50px" }}
+                /> */}
+                <div>
+                  <div className="w-20 h-20 bg-gradient-to-br from-secondary-100 via-primary-300 to-secondary-300 rounded-full flex items-center justify-center mx-auto shadow-lg">
+                    <span className="material-symbols-rounded text-5xl text-white">
+                      person
+                    </span>
+                  </div>
+                </div>
+                <div className="ml-4">
+                  <h4 className="font-semibold text-secondary-300">Ajadi O.</h4>
+                  <p className="text-black-100">Orchid, Lagos</p>
+                </div>
+              </div>
+              <p className="text-black-200">
+                "Found my dream apartment in just two days using Percher. The
+                scheduling feature made viewing properties so easy!"
+              </p>
+            </div>
+            <div className="bg-white p-6 rounded-2xl shadow-lg">
+              <div className="flex items-center mb-4">
+                <div>
+                  <div className="w-20 h-20 bg-gradient-to-br from-secondary-100 via-primary-300 to-secondary-300 rounded-full flex items-center justify-center mx-auto shadow-lg">
+                    <span className="material-symbols-rounded text-5xl text-white">
+                      person
+                    </span>
+                  </div>
+                </div>
+                {/* <img
+                  src="https://cdn.percher.africa/1745062099413-vp5js2zo24j.jpeg"
+                  width="100px"
+                  height="100px"
+                  style={{ borderRadius: "50px" }}
+                /> */}
+                <div className="ml-4">
+                  <h4 className="font-semibold text-secondary-300">
+                    Favour I.
+                  </h4>
+                  <p className="text-black-100">Ikate, Lagos</p>
+                </div>
+              </div>
+              <p className="text-black-200">
+                "The digital registration process saved me so much time. No more
+                printing and scanning documents!"
+              </p>
+            </div>
+            <div className="bg-white p-6 rounded-2xl shadow-lg">
+              <div className="flex items-center mb-4">
+                {/* <img
+                  src="https://cdn.percher.africa/1744935625460-fo96jqgpg3j.jpeg"
+                  width="100px"
+                  height="100px"
+                  style={{ borderRadius: "50px" }}
+                /> */}
+                <div>
+                  <div className="w-20 h-20 bg-gradient-to-br from-secondary-100 via-primary-300 to-secondary-300 rounded-full flex items-center justify-center mx-auto shadow-lg">
+                    <span className="material-symbols-rounded text-5xl text-white">
+                      person
+                    </span>
+                  </div>
+                </div>
+                <div className="ml-4">
+                  <h4 className="font-semibold text-secondary-300">
+                    Sodunke O.
+                  </h4>
+                  <p className="text-black-100">Gwarinpa, Abuja</p>
+                </div>
+              </div>
+              <p className="text-black-200">
+                "The filters helped me find exactly what I was looking for
+                within my budget. Highly recommend!"
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Download Section */}
       {/* <section id="download" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -326,7 +474,7 @@ function Home() {
             Ready to Find Your Perfect Space?
           </h2>
           <p className="text-xl text-black-100 mb-12 max-w-2xl mx-auto">
-            Download Leankly today and start your journey to finding your dream
+            Download Percher today and start your journey to finding your dream
             rental perch.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -335,7 +483,7 @@ function Home() {
               className="h-16 inline-flex items-center justify-center gap-2 bg-black text-white px-8 py-4 rounded-full hover:bg-black/90"
             >
               <img
-                src="https://cdn.leankly.africa/apple-logo-white.png"
+                src="https://cdn.percher.africa/apple-logo-white.png"
                 width="50px"
               />
               <span>Download from App Store</span>
@@ -345,7 +493,7 @@ function Home() {
               className="h-16 inline-flex items-center justify-center gap-2 bg-black text-white px-8 py-4 rounded-full hover:bg-black/90"
             >
               <img
-                src="https://cdn.leankly.africa/google-play-logo-colored.png"
+                src="https://cdn.percher.africa/google-play-logo-colored.png"
                 width="30px"
               />
               <span>Download from Google Play</span>
@@ -355,14 +503,14 @@ function Home() {
       </section> */}
 
       {/* Footer */}
-      <Footer />
+      <Footer onNavigate={navigateTo} />
 
       {/* Success Modal */}
       <Modal
         isOpen={isModalOpen}
         onClose={closeModal}
         title="Successfully Joined!"
-        message="Thank you for joining our waitlist! We'll notify you as soon as Leankly is available in your area."
+        message="Thank you for joining our waitlist! We'll notify you as soon as Percher is available in your area."
         type="success"
       />
 
@@ -371,43 +519,6 @@ function Home() {
 
       {/* Toast Manager */}
       <ToastManager />
-    </>
-  );
-}
-
-function App() {
-  const location = useLocation();
-  const getCurrentPage = () => {
-    const path = location.pathname;
-    if (path === "/about") return "about";
-    if (path === "/contact") return "contact";
-    if (path === "/privacy") return "privacy";
-    if (path === "/terms") return "terms";
-    return "home";
-  };
-
-  const navigateTo = (_page?: string) => {
-    // This function is kept for backward compatibility with components
-    // but navigation should use Link components
-    window.scrollTo(0, 0);
-  };
-
-  return (
-    <>
-      <Navigation currentPage={getCurrentPage()} />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<AboutUs onNavigate={navigateTo} />} />
-        <Route path="/contact" element={<Contact onNavigate={navigateTo} />} />
-        <Route
-          path="/privacy"
-          element={<PrivacyPolicy onNavigate={navigateTo} />}
-        />
-        <Route
-          path="/terms"
-          element={<TermsOfService onNavigate={navigateTo} />}
-        />
-      </Routes>
     </>
   );
 }

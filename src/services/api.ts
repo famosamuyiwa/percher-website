@@ -3,12 +3,6 @@ import axios, {
   AxiosResponse,
   AxiosError,
 } from "axios";
-import { ID } from "appwrite";
-import {
-  databases,
-  APPWRITE_DATABASE_ID,
-  APPWRITE_WAITLIST_TABLE_ID,
-} from "./appwrite";
 import { ContactFormDto } from "../interfaces/common";
 
 // API base configuration
@@ -69,45 +63,18 @@ export interface ApiError {
 
 // API service functions
 export const apiService = {
-  // Waitlist API using Appwrite Tables
+  // Waitlist API
   async joinWaitlist(data: WaitlistRequest) {
     try {
-      if (!APPWRITE_DATABASE_ID || !APPWRITE_WAITLIST_TABLE_ID) {
-        throw new Error("Appwrite configuration is missing");
-      }
-
-      // Prepare row data - only include fields that have values
-      const rowData: Record<string, string> = {
-        email: data.email,
-      };
-
-      if (data.name) {
-        rowData.name = data.name;
-      }
-      if (data.phone) {
-        rowData.phone = data.phone;
-      }
-      if (data.location) {
-        rowData.location = data.location;
-      }
-
-      const row = await databases.createRow(
-        APPWRITE_DATABASE_ID,
-        APPWRITE_WAITLIST_TABLE_ID,
-        ID.unique(),
-        rowData
-      );
-
-      return row;
+      const response = await apiClient.post("/waitlist", data);
+      return response.data;
     } catch (error: unknown) {
-      const appwriteError = error as {
-        message?: string;
-        code?: number;
-        type?: string;
-      };
+      const axiosError = error as AxiosError;
       throw {
-        message: appwriteError.message || "Failed to join waitlist",
-        status: appwriteError.code,
+        message:
+          (axiosError.response?.data as { message?: string })?.message ||
+          "Failed to join waitlist",
+        status: axiosError.response?.status,
       } as ApiError;
     }
   },
